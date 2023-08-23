@@ -47,6 +47,8 @@ Which is a shortcut for this:
 uuid_primary_key :id, type: Ash.Type.ULID, default: &Ash.ULID.generate/0
 ```
 
+To prevent formatter from adding parens to `ulid_primary_key` add `:ash_ulid` to `import_deps` in `.formatter.exs`.
+
 ### Attribute type
 
 `Ash.Type.ULID` can be registered under `ulid` name in a config:
