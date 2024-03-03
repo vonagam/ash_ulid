@@ -28,7 +28,7 @@ end
 
 ### Primary key
 
-To use as a primary key in `Ash.Resource` it is recommended to add `Ash.ULID.Extension`:
+To use as a primary key in `Ash.Resource` it is recommended to add `Ash.ULID.Extension` that provides `ulid_primary_key`:
 
 ```elixir
 defmodule Example.Resource do
@@ -48,6 +48,12 @@ uuid_primary_key :id, type: Ash.Type.ULID, default: &Ash.ULID.generate/0
 ```
 
 To prevent formatter from adding parens to `ulid_primary_key` add `:ash_ulid` to `import_deps` in `.formatter.exs`.
+
+If you plan to use ULID as a main type for primary keys it makes sense to set it as `default_belongs_to_type` in a config:
+
+```elixir
+config :ash, default_belongs_to_type: Ash.Type.ULID
+```
 
 ### Attribute type
 
@@ -72,6 +78,8 @@ end
 ```
 
 Without an alias it is the same, just replace `:ulid` with `Ash.Type.ULID`.
+
+If `default_belongs_to_type` is set then `attribute_type: :ulid` in this example is not needed.
 
 ### Generate
 
