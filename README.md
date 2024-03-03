@@ -1,4 +1,4 @@
-# Ash.ULID
+# AshUlid
 
 [![Module Version](https://img.shields.io/hexpm/v/ash_ulid)](https://hex.pm/packages/ash_ulid)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen)](https://hexdocs.pm/ash_ulid/)
@@ -8,9 +8,9 @@
 
 Consists of three modules:
 
-- `Ash.ULID` - utility functions to generate ULIDs.
-- `Ash.Type.ULID` - `Ash.Type` implementation.
-- `Ash.ULID.Extension` - `ulid_primary_key` shortcut.
+- `AshUlid` - utility functions to generate ULIDs.
+- `AshUlid.Type` - `Ash.Type` implementation.
+- `AshUlid.Extension` - `ulid_primary_key` shortcut.
 
 ## Installation
 
@@ -19,7 +19,7 @@ Add to the deps, get deps (`mix deps.get`), compile them (`mix deps.compile`).
 ```elixir
 def deps do
   [
-    {:ash_uuid, "~> 0.1"},
+    {:ash_ulid, "~> 0.2.0"},
   ]
 end
 ```
@@ -28,12 +28,12 @@ end
 
 ### Primary key
 
-To use as a primary key in `Ash.Resource` it is recommended to add `Ash.ULID.Extension` that provides `ulid_primary_key`:
+To use as a primary key in `Ash.Resource` it is recommended to add `AshUlid.Extension` that provides `ulid_primary_key`:
 
 ```elixir
 defmodule Example.Resource do
   use Ash.Resource,
-    extensions: [Ash.ULID.Extension]
+    extensions: [AshUlid.Extension]
 
   attributes do
     ulid_primary_key :id
@@ -44,7 +44,7 @@ end
 Which is a shortcut for this:
 
 ```elixir
-uuid_primary_key :id, type: Ash.Type.ULID, default: &Ash.ULID.generate/0
+uuid_primary_key :id, type: AshUlid.Type, default: &AshUlid.generate/0
 ```
 
 To prevent formatter from adding parens to `ulid_primary_key` add `:ash_ulid` to `import_deps` in `.formatter.exs`.
@@ -52,14 +52,14 @@ To prevent formatter from adding parens to `ulid_primary_key` add `:ash_ulid` to
 If you plan to use ULID as a main type for primary keys it makes sense to set it as `default_belongs_to_type` in a config:
 
 ```elixir
-config :ash, default_belongs_to_type: Ash.Type.ULID
+config :ash, default_belongs_to_type: AshUlid.Type
 ```
 
 ### Attribute type
 
-`Ash.Type.ULID` can be registered under `ulid` name in a config:
+`AshUlid.Type` can be registered under `ulid` name in a config:
 ```elixir
-config :ash, custom_types: [ulid: Ash.Type.ULID]
+config :ash, custom_types: [ulid: AshUlid.Type]
 ```
 
 And then used like this:
@@ -77,13 +77,13 @@ defmodule Example.Another do
 end
 ```
 
-Without an alias it is the same, just replace `:ulid` with `Ash.Type.ULID`.
+Without an alias it is the same, just replace `:ulid` with `AshUlid.Type`.
 
 If `default_belongs_to_type` is set then `attribute_type: :ulid` in this example is not needed.
 
 ### Generate
 
-To generate ULID call `Ash.ULID.generate/0` or `Ash.ULID.generate/1` with a specific timestamp.
+To generate ULID call `AshUlid.generate/0` or `AshUlid.generate/1` with a specific timestamp.
 
 ## References
 

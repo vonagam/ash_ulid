@@ -1,4 +1,4 @@
-defmodule Ash.Type.ULID do
+defmodule AshUlid.Type do
   @moduledoc """
   `Ash.Type` implementation for ULID.
   """
@@ -10,7 +10,7 @@ defmodule Ash.Type.ULID do
 
   @impl true
   def generator(_) do
-    StreamData.integer() |> StreamData.bind(fn _i -> Ash.ULID.generate() end) |> StreamData.unshrinkable()
+    StreamData.integer() |> StreamData.bind(fn _i -> AshUlid.generate() end) |> StreamData.unshrinkable()
   end
 
   @impl true

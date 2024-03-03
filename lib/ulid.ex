@@ -1,4 +1,4 @@
-defmodule Ash.ULID do
+defmodule AshUlid do
   @moduledoc """
   Helpers for working with ULIDs.
   """
@@ -18,7 +18,7 @@ defmodule Ash.ULID do
   """
   @spec generate() :: t
   def generate() do
-    {:ok, ulid} = Ash.Type.ULID.cast_stored(generate_binary(), nil)
+    {:ok, ulid} = AshUlid.Type.cast_stored(generate_binary(), nil)
     ulid
   end
 
@@ -27,7 +27,7 @@ defmodule Ash.ULID do
   """
   @spec generate(time :: non_neg_integer) :: t
   def generate(time) when is_integer(time) and time > -1 and time < 281_474_976_710_656 do
-    {:ok, ulid} = Ash.Type.ULID.cast_stored(generate_binary(time), nil)
+    {:ok, ulid} = AshUlid.Type.cast_stored(generate_binary(time), nil)
     ulid
   end
 
