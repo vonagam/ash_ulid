@@ -10,7 +10,7 @@ defmodule AshUlid.Type do
 
   @impl true
   def generator(_) do
-    StreamData.integer() |> StreamData.bind(fn _i -> AshUlid.generate() end) |> StreamData.unshrinkable()
+    Stream.repeatedly(&AshUlid.generate/0)
   end
 
   @impl true
@@ -57,8 +57,8 @@ defmodule AshUlid.Type do
      <<d(c1)::3, d(c2)::5, d(c3)::5, d(c4)::5, d(c5)::5, d(c6)::5, d(c7)::5, d(c8)::5, d(c9)::5, d(c10)::5, d(c11)::5,
        d(c12)::5, d(c13)::5, d(c14)::5, d(c15)::5, d(c16)::5, d(c17)::5, d(c18)::5, d(c19)::5, d(c20)::5, d(c21)::5,
        d(c22)::5, d(c23)::5, d(c24)::5, d(c25)::5, d(c26)::5>>}
-  catch
-    :error -> :error
+  catch :error ->
+    :error
   end
 
   def dump_to_native(nil, _), do: {:ok, nil}
