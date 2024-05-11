@@ -2,7 +2,7 @@ defmodule AshUlid.MixProject do
   use Mix.Project
 
   @name :ash_ulid
-  @version "0.2.1"
+  @version "1.0.0"
   @description "ULID type for Ash framework"
   @github_url "https://github.com/vonagam/ash_ulid"
 
@@ -15,6 +15,7 @@ defmodule AshUlid.MixProject do
       package: package(),
       deps: deps(),
       docs: docs(),
+      aliases: aliases(),
     ]
   end
 
@@ -34,9 +35,9 @@ defmodule AshUlid.MixProject do
 
   defp deps() do
     [
-      {:ash, ">= 2.14.3 and < 3.0.0"},
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false},
-      {:dialyxir, "~> 1.3", only: :dev, runtime: false},
+      {:ash, "~> 3.0"},
+      {:ex_doc, "~> 0.32", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.4", only: :dev, runtime: false},
       {:benchfella, "~> 0.3.5", only: :dev, runtime: false},
       {:freedom_formatter, "~> 2.1", only: [:dev, :test], runtime: false},
     ]
@@ -49,9 +50,19 @@ defmodule AshUlid.MixProject do
       source_ref: "v#{@version}",
       extras: [
         "README.md": [title: "Guide"],
+        "documentation/dsls/DSL:-AshUlid.Resource.md": [title: "DSL: AshUlid.Resource"],
         "LICENSE.md": [title: "License"],
       ],
       main: "readme",
+    ]
+  end
+
+  defp aliases() do
+    [
+      docs: ["spark.cheat_sheets", "docs", "spark.replace_doc_links", "spark.cheat_sheets_in_search"],
+      "spark.cheat_sheets": "spark.cheat_sheets --extensions AshUlid.Resource",
+      "spark.cheat_sheets_in_search": "spark.cheat_sheets_in_search --extensions AshUlid.Resource",
+      "spark.formatter": ["spark.formatter --extensions AshUlid.Resource", "format .formatter.exs"],
     ]
   end
 end

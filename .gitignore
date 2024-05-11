@@ -112,3 +112,6 @@ $RECYCLE.BIN/
 
 # Benchfella
 /bench/snapshots
+
+# spark generated
+/documentation

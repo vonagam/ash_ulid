@@ -10,7 +10,7 @@ Consists of three modules:
 
 - `AshUlid` - utility functions to generate ULIDs.
 - `AshUlid.Type` - `Ash.Type` implementation.
-- `AshUlid.Extension` - `ulid_primary_key` shortcut.
+- `AshUlid.Resource` - resource extension with `ulid_primary_key` shortcut.
 
 ## Installation
 
@@ -19,7 +19,7 @@ Add to the deps, get deps (`mix deps.get`), compile them (`mix deps.compile`).
 ```elixir
 def deps do
   [
-    {:ash_ulid, "~> 0.2.1"},
+    {:ash_ulid, "~> 1.0.0"},
   ]
 end
 ```
@@ -28,12 +28,12 @@ end
 
 ### Primary key
 
-To use as a primary key in `Ash.Resource` it is recommended to add `AshUlid.Extension` that provides `ulid_primary_key`:
+To use as a primary key in `Ash.Resource` it is recommended to add `AshUlid.Resource` extension that provides `ulid_primary_key`:
 
 ```elixir
 defmodule Example.Resource do
   use Ash.Resource,
-    extensions: [AshUlid.Extension]
+    extensions: [AshUlid.Resource]
 
   attributes do
     ulid_primary_key :id

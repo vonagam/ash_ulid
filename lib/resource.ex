@@ -1,11 +1,11 @@
-defmodule AshUlid.Extension do
+defmodule AshUlid.Resource do
   @moduledoc """
-  `Spark.Dsl.Extension` which adds `ulid_primary_key` to `attributes` section of `Ash.Resource`.
+  Ash resource extension which adds `ulid_primary_key` to `attributes` section.
   """
 
   @ulid_primary_key_schema Ash.Resource.Attribute.uuid_primary_key_schema()
-                           |> Spark.OptionsHelpers.set_default!(:type, AshUlid.Type)
-                           |> Spark.OptionsHelpers.set_default!(:default, &AshUlid.generate/0)
+                           |> Spark.Options.Helpers.set_default!(:type, AshUlid.Type)
+                           |> Spark.Options.Helpers.set_default!(:default, &AshUlid.generate/0)
 
   @ulid_primary_key %Spark.Dsl.Entity{
     name: :ulid_primary_key,
@@ -17,6 +17,7 @@ defmodule AshUlid.Extension do
 
     ```elixir
       writable? false
+      public? true
       default &AshUlid.generate/0
       primary_key? true
       type AshUlid.Type
