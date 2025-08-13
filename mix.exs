@@ -2,7 +2,7 @@ defmodule AshUlid.MixProject do
   use Mix.Project
 
   @name :ash_ulid
-  @version "1.0.0"
+  @version "1.0.1"
   @description "ULID type for Ash framework"
   @github_url "https://github.com/vonagam/ash_ulid"
 
