@@ -64,6 +64,24 @@ defmodule AshUlid.Type do
   def dump_to_native(nil, _), do: {:ok, nil}
   def dump_to_native(_, _), do: :error
 
+  @impl true
+  def dump_to_embedded(nil, _), do: {:ok, nil}
+
+  def dump_to_embedded(value, _constraints) when is_binary(value) do
+    # If it's already a string ULID (26 chars), return as-is
+    if String.length(value) == 26 do
+      {:ok, value}
+    else
+      # If it's a binary UUID (16 bytes), convert to ULID string
+      case cast_stored(value, []) do
+        {:ok, ulid_string} -> {:ok, ulid_string}
+        _ -> :error
+      end
+    end
+  end
+
+  def dump_to_embedded(_, _), do: :error
+
   @compile {:inline, v: 1}
   defp v(?0), do: true
   defp v(?1), do: true
