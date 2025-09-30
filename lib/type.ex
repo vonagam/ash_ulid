@@ -64,6 +64,11 @@ defmodule AshUlid.Type do
   def dump_to_native(nil, _), do: {:ok, nil}
   def dump_to_native(_, _), do: :error
 
+  @impl true
+  def dump_to_embedded(value, constraints) do
+    cast_input(value, constraints)
+  end
+
   @compile {:inline, v: 1}
   defp v(?0), do: true
   defp v(?1), do: true
