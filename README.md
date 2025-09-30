@@ -19,7 +19,7 @@ Add to the deps, get deps (`mix deps.get`), compile them (`mix deps.compile`).
 ```elixir
 def deps do
   [
-    {:ash_ulid, "~> 1.0.0"},
+    {:ash_ulid, "~> 1.0.1"},
   ]
 end
 ```
